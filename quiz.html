@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<h2>🧠 Online Quiz</h2>
+
+<form method="POST" action="{{ url_for('result') }}">
+
+    <p>Time: <span id="timer">0</span> sec</p>
+    <input type="hidden" name="time_taken" id="time_taken">
+
+   <div class="container">
+        <h2>Online Quiz</h2>
+
+        {% for q in questions %}
+        <div class="question-box">
+            <h4>{{ loop.index }}. {{ q.question }}</h4>
+
+            <label class="option">
+                <input type="radio" name="{{ q.id }}" value="1"> {{ q.option1 }}
+            </label>
+            <label class="option">
+                <input type="radio" name="{{ q.id }}" value="2"> {{ q.option2 }}
+            </label>
+            <label class="option">
+                <input type="radio" name="{{ q.id }}" value="3"> {{ q.option3 }}
+            </label>
+            <label class="option">
+                <input type="radio" name="{{ q.id }}" value="4"> {{ q.option4 }}
+            </label>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="submit-btn">Submit Quiz</button>
+    </div>
+
+</form>
+
+<script>
+let sec = 0;
+setInterval(() => {
+    sec++;
+    document.getElementById("timer").innerText = sec;
+    document.getElementById("time_taken").value = sec;
+}, 1000);
+</script>
+
+</body>
+</html>
